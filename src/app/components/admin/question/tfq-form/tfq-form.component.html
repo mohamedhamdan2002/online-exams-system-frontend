@@ -1,0 +1,32 @@
+<form (ngSubmit)="save()" [formGroup]="form">
+  <h1 mat-dialog-title>{{inputData.title}}</h1>
+  <div mat-dialog-content class="row">
+    <mat-form-field appearance="outline" class="col-12 mt-2">
+      <mat-label>Title</mat-label>
+      <input formControlName="title" matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="col-6">
+      <mat-label>Total Marks</mat-label>
+      <input formControlName="mark" matInput type="number" min="0">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="col-6">
+      <mat-label>Difficulty</mat-label>
+      <mat-select formControlName="difficulty">
+        <mat-option [value]="0">Hard</mat-option>
+        <mat-option [value]="1">Easy</mat-option>
+        <mat-option [value]="2">Medium</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>correct Answer</mat-label>
+      <mat-select formControlName="correctAnswer">
+        <mat-option [value]="true">True</mat-option>
+        <mat-option [value]="false">False</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button [disabled]="form.touched && form.invalid" type="submit" class="main-btn">save</button>
+    <button (click)="close(false)" mat-raised-button type="button" color="warn">close</button>
+  </div>
+</form>

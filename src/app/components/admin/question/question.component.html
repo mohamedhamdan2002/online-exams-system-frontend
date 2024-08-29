@@ -1,0 +1,129 @@
+<!-- <mat-tab-group  (selectedIndexChange)="curTab($event)" preserveContent class="mt-4">
+  <mat-tab  [tabIndex]="0" label="MCQ Questions">
+    <div class="p-5">
+      <button class="mb-4 d-block me-4 ms-auto main-btn-outline" mat-raised-button (click)="addQuestion('MCQ')">+ Add MCQ</button>
+      <div class="table-container mat-elevation-z8">
+        <table mat-table [dataSource]="mcqDataSource" matSort>
+          <ng-container matColumnDef="No">
+            <th mat-sort-header mat-header-cell *matHeaderCellDef>No</th>
+            <td mat-cell *matCellDef="let index = index">{{index + 1}}</td>
+          </ng-container>
+          <ng-container matColumnDef="Title">
+            <th mat-sort-header mat-header-cell *matHeaderCellDef>Title</th>
+            <td mat-cell *matCellDef="let element">{{element.title}}</td>
+          </ng-container>
+          <ng-container matColumnDef="Action">
+            <th mat-header-cell *matHeaderCellDef>Action</th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-button><mat-icon>details</mat-icon></button>
+              <button (click)="editQuestion('MCQ', element.id)" mat-button color="primary"><mat-icon>edit</mat-icon></button>
+              <button (click)="deleteQuestion(element.id, element.title, 'MCQ')" mat-button color="warn"><mat-icon>delete</mat-icon></button>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+          <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
+        </table>
+          <div>
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab #tap [tabIndex]="1" label="TF Questions">
+    <div class="p-5">
+      <button class="mb-4 d-block me-4 ms-auto main-btn-outline" mat-raised-button (click)="addQuestion('TF')">+ Add TF</button>
+      <div class="table-container mat-elevation-z8">
+          <table mat-table [dataSource]="tfDataSource" matSort>
+            <ng-container matColumnDef="No">
+              <th mat-sort-header mat-header-cell *matHeaderCellDef>No</th>
+              <td mat-cell *matCellDef="let index = index">{{index + 1}}</td>
+            </ng-container>
+            <ng-container matColumnDef="Title">
+              <th mat-sort-header mat-header-cell *matHeaderCellDef>Title</th>
+              <td mat-cell *matCellDef="let element">{{element.title}}</td>
+            </ng-container>
+            <ng-container matColumnDef="Action">
+              <th mat-header-cell *matHeaderCellDef>Action</th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-button><mat-icon>details</mat-icon></button>
+                <button (click)="editQuestion('TF', element.id)" mat-button color="primary"><mat-icon>edit</mat-icon></button>
+                <button (click)="deleteQuestion(element.id, element.title, 'TF')" mat-button color="warn"><mat-icon>delete</mat-icon></button>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+            <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
+          </table>
+          <div>
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group> -->
+
+<div class="p-5">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link btn" [ngClass]="{active: currentTab() == 1}" aria-current="page" (click)="currentTab.set(1)">MCQ Questions</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link btn" [ngClass]="{active: currentTab() == 2}" (click)="currentTab.set(2)">TF Questions</a>
+    </li>
+  </ul>
+<ng-container *ngIf="currentTab() == 1">
+    <button class="mb-4 d-block me-4 ms-auto main-btn-outline" mat-raised-button (click)="addQuestion('MCQ')">+ Add MCQ</button>
+    <div class="table-container mat-elevation-z8">
+      <table mat-table [dataSource]="mcqDataSource" matSort>
+        <ng-container matColumnDef="No">
+          <th mat-sort-header mat-header-cell *matHeaderCellDef>No</th>
+          <td mat-cell *matCellDef="let index = index">{{index + 1}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Title">
+          <th mat-sort-header mat-header-cell *matHeaderCellDef>Title</th>
+          <td mat-cell *matCellDef="let element">{{element.title}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Action">
+          <th mat-header-cell *matHeaderCellDef>Action</th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-button><mat-icon>details</mat-icon></button>
+            <button (click)="editQuestion('MCQ', element.id)" mat-button color="primary"><mat-icon>edit</mat-icon></button>
+            <button (click)="deleteQuestion(element.id, element.title, 'MCQ')" mat-button color="warn"><mat-icon>delete</mat-icon></button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
+      </table>
+        <div>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      </div>
+    </div>
+  </ng-container>
+<ng-container *ngIf="currentTab() == 2">
+    <button class="mb-4 d-block me-4 ms-auto main-btn-outline" mat-raised-button (click)="addQuestion('TF')">+ Add TF</button>
+    <div class="table-container mat-elevation-z8">
+        <table mat-table [dataSource]="tfDataSource" matSort>
+          <ng-container matColumnDef="No">
+            <th mat-sort-header mat-header-cell *matHeaderCellDef>No</th>
+            <td mat-cell *matCellDef="let index = index">{{index + 1}}</td>
+          </ng-container>
+          <ng-container matColumnDef="Title">
+            <th mat-sort-header mat-header-cell *matHeaderCellDef>Title</th>
+            <td mat-cell *matCellDef="let element">{{element.title}}</td>
+          </ng-container>
+          <ng-container matColumnDef="Action">
+            <th mat-header-cell *matHeaderCellDef>Action</th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-button><mat-icon>details</mat-icon></button>
+              <button (click)="editQuestion('TF', element.id)" mat-button color="primary"><mat-icon>edit</mat-icon></button>
+              <button (click)="deleteQuestion(element.id, element.title, 'TF')" mat-button color="warn"><mat-icon>delete</mat-icon></button>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+          <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
+        </table>
+        <div>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      </div>
+    </div>
+  </ng-container>
+</div>

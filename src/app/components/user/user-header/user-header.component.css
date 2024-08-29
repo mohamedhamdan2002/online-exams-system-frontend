@@ -1,0 +1,47 @@
+.header {
+  background-color: #FFFFFF;
+  height: 80px;
+  font-family: 'Poppins';
+}
+.header .logo-text {
+  font-family: 'Roboto';
+  color: #4A3AFF;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 47px;
+}
+.logo .img-logo {
+  max-width: 50px;
+}
+.navbar .navbar-nav .nav-link.active,
+.navbar .navbar-nav .nav-link:focus,
+.navbar .navbar-nav .nav-link:hover {
+  color: #4A3AFF;
+  border-bottom: 2px solid #4A3AFF;
+}
+.navbar .navbar-nav .nav-link{
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 18px;
+  text-align: center;
+  color: #5D5A88;
+}
+.main-btn-p {
+  border: 1px solid;
+}
+.main-btn-p:hover,
+.register-btn {
+  background-color: #4A3AFF;
+  color: white;
+  border: 1px solid transparent;
+}
+
+
+
+
+
+
+

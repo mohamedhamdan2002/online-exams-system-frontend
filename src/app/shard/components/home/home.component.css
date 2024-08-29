@@ -1,0 +1,76 @@
+
+.home {
+  min-height: calc(100vh - 64px);
+  background-color: #FAFAFC;
+}
+.home-text h1 {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 50px;
+  line-height: 105px;
+  color: #000000;
+}
+.home-text p {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 45px;
+  text-transform: uppercase;
+  color: #000000;
+}
+@media (min-width: 992px) {
+  .home-text h1 {
+    font-size: 70px;
+  }
+  .home-text p {
+    font-size: 30px;
+  }
+}
+.home-text .user-num {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 50px;
+  line-height: 75px;
+  color: #4A3AFF;
+}
+@media (max-width: 768px) {
+  .home-text {
+    text-align: center;
+  }
+  .home-text h1 {
+    line-height: 85px;
+  }
+  .home-text p {
+    line-height: 30px;
+  }
+  .home-text .user-num {
+    font-size: 40px;
+    line-height: 60px;
+  }
+}
+
+/* groups */
+.groups {
+  background-color: #4A3AFF;
+}
+.groups div {
+  position: relative;
+}
+.groups div:first-of-type img{
+  position: absolute;
+  bottom: -490px;
+  left: 30px;
+}
+.groups div:nth-of-type(2) img{
+  position: absolute;
+  bottom: -300px;
+  left: 45px;
+}
+.groups div:last-of-type img {
+  position: absolute;
+  top: -325px;
+  left: -30px
+}

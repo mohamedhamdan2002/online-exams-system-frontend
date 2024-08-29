@@ -1,0 +1,12 @@
+<div class="card mat-elevation-z8">
+  <!-- <div class="mb-4">
+    <mat-progress-bar mode="determinate" [value]="(selectedIndex * 25)"></mat-progress-bar>
+  </div> -->
+  <ng-container  *ngIf="selected" class="p-5">
+    <ng-container [ngTemplateOutlet]="selected.content"></ng-container>
+  </ng-container>
+  <div class="d-flex p-4 justify-content-between">
+    <button mat-raised-button type="button" class= "main-btn-outline" cdkStepperPrevious [class.disabled]="selectedIndex == 0"><mat-icon>navigate_before</mat-icon><span>Previous</span></button>
+    <button mat-raised-button type="button"  class="main-btn-outline" cdkStepperNext [class.disabled]="selectedIndex == stepCount-1"><span>Next</span><mat-icon>navigate_next</mat-icon></button>
+  </div>
+</div>

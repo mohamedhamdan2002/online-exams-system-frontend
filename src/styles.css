@@ -1,1 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: "Poppins", sans-serif; }
+.main-btn {
+  background-color: #4A3AFF!important;
+  color: #CCCCCC!important;
+}
+.main-color {
+  color: #4A3AFF!important;
+}
+.edit:hover {
+  background-color: #CCCCCC!important;;
+}
+.table-container {
+  background-color: white;
+  border: 2px solid transparent;
+  padding: 40px;
+  border-radius: 20px;
+}
+
+.main-btn-outline {
+  background-color: white!important;
+  color: #4A3AFF!important;
+  border-radius: 20px !important;
+  border: 1px solid #4A3AFF !important;
+  transition: all 400ms ease-in-out !important;
+}
+.main-btn-outline:hover {
+  background-color: #4A3AFF!important;
+  color: #CCCCCC!important;
+}

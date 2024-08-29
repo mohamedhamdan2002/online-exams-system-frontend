@@ -1,0 +1,21 @@
+.q-title {
+  border-bottom: 1px solid black;
+}
+.q-title span {
+
+}
+.q-title .form-label {
+
+}
+.form-check {
+  border: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+}
+.form-check label {
+  margin-left: 40px;
+
+}
+.form-check input {
+  margin-right: 20px;
+}

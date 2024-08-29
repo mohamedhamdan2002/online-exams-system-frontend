@@ -1,0 +1,49 @@
+<mat-drawer-container class="vh-100 drawer-container fixed-top">
+  <mat-drawer [ngClass]="{collapsed: collapsed()}"  #drawer opened="true" mode="side" position="start">
+    <mat-icon class="close" *ngIf="!collapsed()"  (click)="collapsed.set(!collapsed())">close</mat-icon>
+    <div class="logo" [class.hide-logo-text]="collapsed()">
+      <img class="img-logo" src="assets/logo7.png" alt="">
+      <span *ngIf="!collapsed()">Online Exam</span>
+    </div>
+    <mat-nav-list class="nav-list">
+      <a mat-list-item *ngIf="collapsed()" (click)="collapsed.set(!collapsed())">
+        <mat-icon matListItemIcon>menu</mat-icon>
+      </a>
+      <ng-container *ngIf="!isAdmin">
+        <a mat-list-item *ngFor="let item of userMenuItems()" [routerLink]="item.route" routerLinkActive="active">
+          <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+          <span matListItemTitle *ngIf="!collapsed()">{{ item.label }}</span>
+        </a>
+      </ng-container>
+      <ng-container *ngIf="isAdmin">
+        <a mat-list-item *ngFor="let item of adminMenuItems()" [routerLink]="item.route" routerLinkActive="active">
+          <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+          <span matListItemTitle *ngIf="!collapsed()">{{ item.label }}</span>
+        </a>
+      </ng-container>
+    </mat-nav-list>
+    <mat-nav-list class="nav-list-setting">
+      <a mat-list-item mat-list-item routerLink="/user/exams" routerLinkActive="active">
+        <mat-icon matListItemIcon>person</mat-icon>
+        <span matListItemTitle *ngIf="!collapsed()">Profile</span>
+      </a>
+      <a mat-list-item mat-list-item>
+        <mat-icon matListItemIcon>subdirectory_arrow_left</mat-icon>
+        <span matListItemTitle *ngIf="!collapsed()">Sign Out</span>
+      </a>
+    </mat-nav-list>
+  </mat-drawer>
+  <mat-drawer-content class="p-4 position-relative" [style.margin-left]="sidenavWidth()">
+    <header class="mb-4">
+      <div class="container">
+        <div class="p-5">
+          <input type="text" placeholder="search">
+        </div>
+        <div class="p-5">
+          <mat-icon matBadge="15" matBadgeColor="warn">notification_important</mat-icon>
+        </div>
+      </div>
+    </header>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>

@@ -1,0 +1,37 @@
+<div class="d-flex justify-content-center align-items-center vh-100 login">
+  <div class="login-box p-5">
+    <div class="text-center login-text mb-4">
+      <h1>Lets Sign you in</h1>
+      <p class="text-black-50 mb-4">Welcome Back ,You have been missed</p>
+    </div>
+    <form (ngSubmit)="onSubmit()" [formGroup]="form">
+      <div mat-dialog-content class="row">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input  formControlName="email" type="email" matInput >
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input formControlName="password" type="password" matInput>
+        </mat-form-field>
+        <div class="col-5 ms-auto mb-4">
+          <a>Forgot Password?</a>
+        </div>
+      </div>
+      <div mat-dialog-actions class="vstack form-action">
+        <button [disabled]="form.invalid && form.touched"  mat-raised-button class="main-btn" type="submit">Sign In</button>
+        <span class="mt-3 text-center mb-3 or">or</span>
+        <button class="google-btn mb-5" mat-button type="button">
+          <img src="assets/search.png" alt="">
+          <span>Continue with Google</span>
+        </button>
+        <div class="register-text text-center">
+          <span class="text-black-50 me-2">Don't Have An Account?</span>
+          <a routerLink="/signup">Register Now</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+

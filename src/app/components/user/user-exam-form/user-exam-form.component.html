@@ -1,0 +1,124 @@
+
+<div class="d-flex w-100 min-vh-100 justify-content-center align-items-center">
+<form (ngSubmit)="submitForm()" class="w-75">
+    <mat-card-title>{{exam.title}}</mat-card-title>
+<span class="ms-auto me-4 mt-2">time Left: {{exam.duration}}</span>
+<app-custom-stepper #appStepper>
+    <cdk-step class="row" *ngFor="let question of mcqQuestions$ | async;let i = index">
+      <div class="q-title mb-4 col-md-10 offset-md-1 col-lg-8  offset-lg-2">
+        <span class="d-block text-black-50 mb-3">Question {{i+1}}</span>
+        <label class="form-label mb-3">{{question.title}}</label>
+      </div>
+      <div class="form-check mb-2 p-2 col-md-10 offset-md-1 col-lg-8  offset-lg-2">
+        <label for="flexRadioDefault1">
+          {{question.optionA}}
+        </label>
+        <input type="radio" id="flexRadioDefault1" [value]="question.optionA">
+      </div>
+      <div class="form-check mb-2 p-2 col-md-10 offset-md-1 col-lg-8  offset-lg-2">
+        <label for="flexRadioDefault2">
+          {{question.optionB}}
+        </label>
+        <input #inputRef type="radio"  id="flexRadioDefault2" [value]="question.optionB">
+      </div>
+      <div class="form-check mb-2 p-2 col-md-10 offset-md-1 col-lg-8  offset-lg-2" >
+        <label for="flexRadioDefault3" >
+          {{question.optionC}}
+        </label>
+        <input #inputRef type="radio"  id="flexRadioDefault3" class="ms-auto" [value]="question.optionC">
+      </div>
+      <div class="form-check mb-2 p-2 col-md-10 offset-md-1 col-lg-8  offset-lg-2">
+        <label for="flexRadioDefault4">
+          {{question.optionD}}
+        </label>
+        <input #inputRef type="radio"  id="flexRadioDefault4" [value]="question.optionD">
+      </div>
+    </cdk-step>
+    <cdk-step class="row" *ngFor="let question of tfQuestions$ | async;let i = index">
+      <div class="q-title mb-4 col-md-10 offset-md-1 col-lg-8  offset-lg-2">
+        <span class="d-block text-black-50 mb-3">Question {{i+1}}</span>
+        <label class="form-label mb-3">{{question.title}}</label>
+      </div>
+      <div class="form-check mb-2 p-2 col-md-10 offset-md-1 col-lg-8  offset-lg-2">
+        <label for="flexRadioDefault1">
+          True
+        </label>
+        <input #inputRef type="radio" name="answer" id="flexRadioDefault1">
+      </div>
+      <div class="form-check mb-2 p-2 col-md-10 offset-md-1 col-lg-8  offset-lg-2">
+        <label for="flexRadioDefault2">
+          False
+        </label>
+        <input #inputRef type="radio" name="answer" id="flexRadioDefault2">
+      </div>
+    </cdk-step>
+</app-custom-stepper>
+<div class="p-3">
+  <button mat-raised-button class="main-btn d-block mt-4 ms-auto me-5">finish</button>
+</div>
+</form>
+</div>
+<div style="color: black;">
+  {{mcqForm.value | json}}
+</div>
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <mat-stepper labelPosition="bottom" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup" matStepperIcon="home">
+    <form [formGroup]="secondFormGroup">
+      <ng-template></ng-template>
+      <mat-form-field>
+        <mat-label>Address</mat-label>
+        <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
+               required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template></ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-stepper> -->

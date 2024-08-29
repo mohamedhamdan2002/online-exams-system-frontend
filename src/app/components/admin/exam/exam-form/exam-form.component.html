@@ -1,0 +1,205 @@
+<!-- @switch (stepperOrientation | async) {
+  @case ('horizontal') {
+    <div>Make your screen smaller to see a vertical stepper</div>
+  }
+  @case ('vertical') {
+    <div>Make your screen larger to see a horizontal stepper</div>
+  }
+} -->
+<form (ngSubmit)="save()">
+<mat-stepper
+  class="example-stepper mt-5"
+  [orientation]="(stepperOrientation | async)!">
+  <mat-step [stepControl]="GeneralInfoForm" label="General Exam Info">
+    <form [formGroup]="GeneralInfoForm" class="row p-5">
+      <mat-form-field appearance="outline">
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="title" required>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Total Marks</mat-label>
+        <input matInput type="number" formControlName="totalMarks" required>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-6">
+        <mat-label>Level</mat-label>
+        <mat-select formControlName="level">
+          <mat-option [value]="0">First</mat-option>
+          <mat-option [value]="1">Second</mat-option>
+          <mat-option [value]="2">Third</mat-option>
+          <mat-option [value]="3">Fourth</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-6">
+        <mat-label>Category</mat-label>
+        <mat-select [formControl]="categoryId">
+          <ng-container *ngFor="let cat of categoryList">
+            <mat-option value="{{cat.id}}">{{cat.name}}</mat-option>
+          </ng-container>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-6">
+        <mat-label>Term</mat-label>
+        <mat-select formControlName="term">
+          <mat-option [value]="0">First</mat-option>
+          <mat-option [value]="1">Last</mat-option>
+          <mat-option [value]="2">Summery</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col">
+        <mat-label>Date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="date" required>
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col">
+        <mat-label>Duration</mat-label>
+        <input matInput formControlName="duration" required>
+      </mat-form-field>
+      <div class="mt-5">
+        <button mat-stroked-button color="primary" matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <!--------------------------------- question section ------------------------------------------------------------------------- -->
+  <mat-step [stepControl]="secondFormGroup" label="Exam Questions">
+    <form [formGroup]="secondFormGroup">
+      <mat-card class="p-5">
+        <mat-card-header>
+          <mat-form-field appearance="outline" class="">
+            <mat-label>Question Type</mat-label>
+            <mat-select [formControl]="questionType">
+              <mat-option value="MCQ">MCQ</mat-option>
+              <mat-option value="TF">TrueAndFalse</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="mx-4 mt-2">
+            <button mat-raised-button color="primary" [disabled]="questionType.value == ''" (click)="openDailog()">Apply</button>
+          </div>
+        </mat-card-header>
+        <mat-card-content *ngIf="questionType.value != ''">
+          <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+            <mat-tab label="MCQ" *ngIf="isContainData('MCQ')">
+            <table mat-table [dataSource]="mcqDataSource" class="mat-elevation-z8">
+
+              <!-- Checkbox Column -->
+              <ng-container matColumnDef="select">
+                <th mat-header-cell *matHeaderCellDef>
+                  <mat-checkbox (change)="$event ? toggleAllRows('MCQ') : null"
+                                [checked]="mcqSelection.hasValue() && isAllSelected('MCQ')"
+                                [indeterminate]="mcqSelection.hasValue() && !isAllSelected('MCQ')"
+                                [aria-label]="checkboxLabel('MCQ')">
+                  </mat-checkbox>
+                </th>
+                <td mat-cell *matCellDef="let row">
+                  <mat-checkbox (click)="$event.stopPropagation()"
+                                (change)="$event ? mcqSelection.toggle(row) : null"
+                                [checked]="mcqSelection.isSelected(row)"
+                                [aria-label]="checkboxLabel('MCQ', row)">
+                  </mat-checkbox>
+                </td>
+              </ng-container>
+
+              <!-- Position Column -->
+              <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef> No. </th>
+                <td mat-cell *matCellDef="let idx= index"> {{idx + 1}} </td>
+              </ng-container>
+
+              <!-- Name Column -->
+              <ng-container matColumnDef="title">
+                <th mat-header-cell *matHeaderCellDef> Title </th>
+                <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+              </ng-container>
+
+              <!-- Weight Column -->
+              <ng-container matColumnDef="mark">
+                <th mat-header-cell *matHeaderCellDef> Mark </th>
+                <td mat-cell *matCellDef="let element"> {{element.mark}} </td>
+              </ng-container>
+
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="level">
+                <th mat-header-cell *matHeaderCellDef> Difficulty</th>
+                <td mat-cell *matCellDef="let element"> {{element.difficulty}} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                  (click)="mcqSelection.toggle(row)">
+              </tr>
+            </table>
+          </mat-tab>
+          <mat-tab label="TFQ" *ngIf="isContainData('TF')">
+            <table mat-table [dataSource]="tfDataSource" class="mat-elevation-z8">
+
+              <!-- Checkbox Column -->
+              <ng-container matColumnDef="select">
+                <th mat-header-cell *matHeaderCellDef>
+                  <mat-checkbox (change)="$event ? toggleAllRows('TF') : null"
+                                [checked]="tfSelection.hasValue() && isAllSelected('TF')"
+                                [indeterminate]="tfSelection.hasValue() && !isAllSelected('TF')"
+                                [aria-label]="checkboxLabel('TF')">
+                  </mat-checkbox>
+                </th>
+                <td mat-cell *matCellDef="let row">
+                  <mat-checkbox (click)="$event.stopPropagation()"
+                                (change)="$event ? tfSelection.toggle(row) : null"
+                                [checked]="tfSelection.isSelected(row)"
+                                [aria-label]="checkboxLabel('TF', row)">
+                  </mat-checkbox>
+                </td>
+              </ng-container>
+
+              <!-- Position Column -->
+              <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef> No. </th>
+                <td mat-cell *matCellDef="let idx= index"> {{idx + 1}} </td>
+              </ng-container>
+
+              <!-- Name Column -->
+              <ng-container matColumnDef="title">
+                <th mat-header-cell *matHeaderCellDef> Title </th>
+                <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+              </ng-container>
+
+              <!-- Weight Column -->
+              <ng-container matColumnDef="mark">
+                <th mat-header-cell *matHeaderCellDef> Mark </th>
+                <td mat-cell *matCellDef="let element"> {{element.mark}} </td>
+              </ng-container>
+
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="level">
+                <th mat-header-cell *matHeaderCellDef> Difficulty</th>
+                <td mat-cell *matCellDef="let element"> {{element.difficulty}} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                  (click)="tfSelection.toggle(row)">
+              </tr>
+            </table>
+          </mat-tab>
+        </mat-tab-group>
+        </mat-card-content>
+        <br>
+        <mat-card-footer>
+        </mat-card-footer>
+      </mat-card>
+      <div class="mt-5 p-5">
+        <button mat-stroked-button matStepperPrevious>Back</button>
+        <button mat-stroked-button class="mx-2" color="primary" matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button type="submit" class="main-btn" mat-raised-button>Save</button>
+      <button mat-stroked-button matStepperPrevious>Back</button>
+    </div>
+  </mat-step>
+</mat-stepper>
+</form>

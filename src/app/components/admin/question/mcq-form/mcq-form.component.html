@@ -1,0 +1,50 @@
+<form (ngSubmit)="save()" [formGroup]="form">
+  <h1 mat-dialog-title>{{inputData.title}}</h1>
+  <div mat-dialog-content class="row">
+    <mat-form-field appearance="outline" class="col-12 mt-2">
+      <mat-label>Title</mat-label>
+      <input formControlName="title" matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="col-6">
+      <mat-label>Total Marks</mat-label>
+      <input formControlName="mark" matInput type="number">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="col-6">
+      <mat-label>Difficulty</mat-label>
+      <mat-select formControlName="difficulty">
+        <mat-option [value]="0">Hard</mat-option>
+        <mat-option [value]="1">Easy</mat-option>
+        <mat-option [value]="2">Medium</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="col-6">
+      <mat-label>option A</mat-label>
+      <input formControlName="optionA" matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="col-6">
+      <mat-label>option B</mat-label>
+      <input formControlName="optionB" matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="col-6">
+      <mat-label>option C</mat-label>
+      <input formControlName="optionC" matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="col-6">
+      <mat-label>option D</mat-label>
+      <input formControlName="optionD" matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>correct Choice</mat-label>
+      <mat-select formControlName="correctChoice">
+        <mat-option value="a">option A</mat-option>
+        <mat-option value="b">option B</mat-option>
+        <mat-option value="c">option C</mat-option>
+        <mat-option value="d">option D</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button type="submit" [disabled]="form.touched && form.invalid" class="main-btn">save</button>
+    <button (click)="close(false)" mat-raised-button type="button" color="warn">close</button>
+  </div>
+</form>

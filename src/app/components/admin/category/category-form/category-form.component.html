@@ -1,0 +1,17 @@
+<form (ngSubmit)="onSubmit()">
+<h1 mat-dialog-title>{{inputData.title}}</h1>
+<div mat-dialog-content class="row">
+  <mat-form-field appearance="outline" class="col mt-2">
+    <mat-label>Name</mat-label>
+    <input matInput name="catName" [(ngModel)]="categoryObj.name">
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="col">
+    <mat-label>Description</mat-label>
+    <textarea matInput name="description" [(ngModel)]="categoryObj.description"></textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button type="submit" class="main-btn">save</button>
+  <button (click)="onClose(false)" mat-raised-button type="button" color="warn">close</button>
+</div>
+</form>
